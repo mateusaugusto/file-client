@@ -22,6 +22,9 @@ public abstract class SupportService extends AbstractOauth2Service {
         return new HttpEntity<>(this.getHeadersToken());
     }
 
+    protected HttpEntity<Object> getRequestWithOutAccept() {
+        return new HttpEntity<>(this.getHeadersTokenWithoutAcept());
+    }
 
     protected RestTemplate getRestTemplate() {
         return this.restTemplate;

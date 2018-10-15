@@ -57,11 +57,18 @@ public abstract class AbstractOauth2Service implements Oauth2Service {
 
     public HttpHeaders getHeadersToken() {
         HttpHeaders headers = new HttpHeaders();
-        headers.setAccept(Collections.singletonList(MediaType.APPLICATION_JSON));
+        headers.setAccept(Collections.singletonList(MediaType.APPLICATION_JSON_UTF8));
+        return this.buildHeader(headers);
+    }
 
+    public HttpHeaders getHeadersTokenWithoutAcept() {
+        HttpHeaders headers = new HttpHeaders();
+        return this.buildHeader(headers);
+    }
+
+    private  HttpHeaders buildHeader(HttpHeaders headers ){
         try {
             headers.set("Authorization", "Bearer " + this.getOauth2TokenInfo().getAccessToken());
-            headers.setAccept(Collections.singletonList(MediaType.APPLICATION_JSON_UTF8));
             return headers;
         } catch (Exception var3) {
             throw new UnsupportedOperationException(var3);

@@ -95,7 +95,7 @@ public class FileServiceImpl extends SupportService implements FileService {
     public String upload(String aSessionId, MultipartFile file) {
         assert StringUtils.isNotBlank(aSessionId) || file == null;
 
-        HttpEntity<Object> request = this.getRequest();
+        HttpEntity<Object> request = this.getRequestWithOutAccept();
         ResponseEntity<String> response;
         String result;
 
@@ -104,6 +104,7 @@ public class FileServiceImpl extends SupportService implements FileService {
                 .queryParam("file", file)
                 .build()
                 .toUri();
+
 
         response = getRestTemplate().exchange(uri, HttpMethod.POST, request, String.class);
 
